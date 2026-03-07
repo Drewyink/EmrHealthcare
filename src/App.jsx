@@ -3652,7 +3652,7 @@ const NotesDept = ({ onPatient, patientFlow, setPatientFlow }) => {
                     </div>
                   </div>
                   <div style={{padding:"14px 16px",fontSize:12,color:"var(--text)",lineHeight:1.8,whiteSpace:"pre-wrap",fontFamily:"'IBM Plex Mono',monospace",maxHeight:220,overflowY:"auto",background:"var(--navy)20"}}>{note.content||note.text}</div>
-                  <div style={{padding:"8px 16px",background:"var(--card-2)",borderTop:"1px solid var(--border)",display:"flex",gap:8"}}>
+                  <div style={{padding:"8px 16px",background:"var(--card-2)",borderTop:"1px solid var(--border)",display:"flex",gap:8}}>
                     <button onClick={()=>note.patient&&onPatient(note.patient)} style={{padding:"4px 10px",background:"var(--navy-2)",border:"1px solid var(--border)",borderRadius:4,color:"var(--text-2)",fontSize:11,cursor:"pointer"}}>Open Chart</button>
                     {note.status==="Signed"&&<button style={{padding:"4px 10px",background:"var(--navy-2)",border:"1px solid var(--border)",borderRadius:4,color:"var(--text-2)",fontSize:11,cursor:"pointer"}}>Addendum</button>}
                     <button style={{padding:"4px 10px",background:"var(--navy-2)",border:"1px solid var(--border)",borderRadius:4,color:"var(--text-2)",fontSize:11,cursor:"pointer"}}>Print</button>
