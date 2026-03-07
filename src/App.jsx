@@ -3495,7 +3495,7 @@ const RadiologyDept = ({ patientFlow, setPatientFlow }) => {
                   </div>
                   <div style={{padding:16}}>
                     <div style={{fontSize:11,color:"var(--text-3)",fontWeight:700,textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:8}}>Radiologist Report</div>
-                    <div style={{fontSize:13,lineHeight:1.7,color:"var(--text)",background:"var(--navy-2)",border:"1px solid var(--border)",borderRadius:6,padding:"12px 16px",whiteSpace:"pre-wrap",fontFamily:"'IBM Plex Mono',monospace",fontSize:12}}>{study.report||"IMPRESSION: Study reviewed by attending radiologist.\nNo acute cardiopulmonary process identified.\nFinal report pending radiologist attestation."}</div>
+                    <div style={{fontSize:12,lineHeight:1.7,color:"var(--text)",background:"var(--navy-2)",border:"1px solid var(--border)",borderRadius:6,padding:"12px 16px",whiteSpace:"pre-wrap",fontFamily:"'IBM Plex Mono',monospace",fontSize:12}}>{study.report||"IMPRESSION: Study reviewed by attending radiologist.\nNo acute cardiopulmonary process identified.\nFinal report pending radiologist attestation."}</div>
                     {study.findings&&<div style={{marginTop:10,display:"flex",gap:8,flexWrap:"wrap"}}>{study.findings.map(f=><span key={f} style={{background:"var(--amber-dim)",color:"var(--amber)",borderRadius:4,padding:"2px 8px",fontSize:11,border:"1px solid var(--amber)30"}}>{f}</span>)}</div>}
                   </div>
                 </div>
