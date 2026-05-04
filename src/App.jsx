@@ -43,9 +43,9 @@ const GlobalStyle = () => (
 
 // ─── MOCK DATA ────────────────────────────────────────────────────────────────
 const PATIENTS = [
-  { id: "P001", name: "Margaret Chen", dob: "1962-03-15", gender: "F", mrn: "MRN-2024-001", phone: "555-0101", insurance: "BlueCross #BC789012", allergies: ["Penicillin", "Sulfa"], bloodType: "A+", pcp: "Dr. Sarah Okonkwo", status: "Inpatient", room: "3B-412", admitDate: "2025-02-28", diagnosis: "Pneumonia" },
+  { id: "P001", name: "Margaret Chen", dob: "1962-03-15", gender: "F", mrn: "MRN-2024-001", phone: "555-0101", insurance: "BlueCross #BC789012", allergies: ["Penicillin", "Sulfa"], bloodType: "A+", pcp: "Dr. Sarah Ellison", status: "Inpatient", room: "3B-412", admitDate: "2025-02-28", diagnosis: "Pneumonia" },
   { id: "P002", name: "James Whitfield", dob: "1948-07-22", gender: "M", mrn: "MRN-2024-002", phone: "555-0102", insurance: "Medicare #MED456789", allergies: ["Aspirin"], bloodType: "O-", pcp: "Dr. Marcus Rivera", status: "Ambulatory", room: null, admitDate: null, diagnosis: "Type 2 Diabetes" },
-  { id: "P003", name: "Sofia Ramirez", dob: "1985-11-08", gender: "F", mrn: "MRN-2024-003", phone: "555-0103", insurance: "Aetna #AE334455", allergies: [], bloodType: "B+", pcp: "Dr. Sarah Okonkwo", status: "Inpatient", room: "2C-208", admitDate: "2025-03-01", diagnosis: "Post-op Hip Replacement" },
+  { id: "P003", name: "Sofia Ramirez", dob: "1985-11-08", gender: "F", mrn: "MRN-2024-003", phone: "555-0103", insurance: "Aetna #AE334455", allergies: [], bloodType: "B+", pcp: "Dr. Sarah Ellison", status: "Inpatient", room: "2C-208", admitDate: "2025-03-01", diagnosis: "Post-op Hip Replacement" },
   { id: "P004", name: "Robert Nakamura", dob: "1971-05-30", gender: "M", mrn: "MRN-2024-004", phone: "555-0104", insurance: "United #UN998877", allergies: ["Codeine", "Latex"], bloodType: "AB+", pcp: "Dr. Marcus Rivera", status: "Discharged", room: null, admitDate: "2025-02-20", diagnosis: "Appendectomy" },
   { id: "P005", name: "Diane Okafor", dob: "1990-09-14", gender: "F", mrn: "MRN-2024-005", phone: "555-0105", insurance: "Cigna #CI112233", allergies: ["Ibuprofen"], bloodType: "O+", pcp: "Dr. Lisa Park", status: "Scheduled", room: null, admitDate: null, diagnosis: "Routine Checkup" },
 ];
@@ -58,27 +58,27 @@ const VITALS_DATA = {
 
 const MEDS_DATA = {
   P001: [
-    { id: "RX001", drug: "Azithromycin", dose: "500mg", route: "IV", freq: "Q24H", start: "2025-02-28", status: "Active", prescriber: "Dr. Okonkwo", indication: "Pneumonia" },
-    { id: "RX002", drug: "Ceftriaxone", dose: "1g", route: "IV", freq: "Q12H", start: "2025-02-28", status: "Active", prescriber: "Dr. Okonkwo", indication: "Pneumonia" },
-    { id: "RX003", drug: "Albuterol", dose: "2.5mg", route: "NEB", freq: "Q4H PRN", start: "2025-02-28", status: "Active", prescriber: "Dr. Okonkwo", indication: "Bronchospasm" },
+    { id: "RX001", drug: "Azithromycin", dose: "500mg", route: "IV", freq: "Q24H", start: "2025-02-28", status: "Active", prescriber: "Dr. Ellison", indication: "Pneumonia" },
+    { id: "RX002", drug: "Ceftriaxone", dose: "1g", route: "IV", freq: "Q12H", start: "2025-02-28", status: "Active", prescriber: "Dr. Ellison", indication: "Pneumonia" },
+    { id: "RX003", drug: "Albuterol", dose: "2.5mg", route: "NEB", freq: "Q4H PRN", start: "2025-02-28", status: "Active", prescriber: "Dr. Ellison", indication: "Bronchospasm" },
   ],
   P002: [
     { id: "RX004", drug: "Metformin", dose: "1000mg", route: "PO", freq: "BID", start: "2024-06-01", status: "Active", prescriber: "Dr. Rivera", indication: "DM Type 2" },
     { id: "RX005", drug: "Lisinopril", dose: "10mg", route: "PO", freq: "QD", start: "2024-06-01", status: "Active", prescriber: "Dr. Rivera", indication: "HTN" },
   ],
   P003: [
-    { id: "RX006", drug: "Oxycodone/APAP", dose: "5/325mg", route: "PO", freq: "Q4-6H PRN", start: "2025-03-01", status: "Active", prescriber: "Dr. Okonkwo", indication: "Post-op pain" },
-    { id: "RX007", drug: "Enoxaparin", dose: "40mg", route: "SQ", freq: "QD", start: "2025-03-01", status: "Active", prescriber: "Dr. Okonkwo", indication: "DVT prophylaxis" },
-    { id: "RX008", drug: "Cefazolin", dose: "1g", route: "IV", freq: "Q8H", start: "2025-03-01", status: "Discontinued", prescriber: "Dr. Okonkwo", indication: "Surgical prophylaxis" },
+    { id: "RX006", drug: "Oxycodone/APAP", dose: "5/325mg", route: "PO", freq: "Q4-6H PRN", start: "2025-03-01", status: "Active", prescriber: "Dr. Ellison", indication: "Post-op pain" },
+    { id: "RX007", drug: "Enoxaparin", dose: "40mg", route: "SQ", freq: "QD", start: "2025-03-01", status: "Active", prescriber: "Dr. Ellison", indication: "DVT prophylaxis" },
+    { id: "RX008", drug: "Cefazolin", dose: "1g", route: "IV", freq: "Q8H", start: "2025-03-01", status: "Discontinued", prescriber: "Dr. Ellison", indication: "Surgical prophylaxis" },
   ],
 };
 
 const LAB_DATA = {
   P001: [
-    { id: "L001", test: "CBC with Differential", ordered: "2025-02-28 08:30", resulted: "2025-02-28 10:15", status: "Final", orderedBy: "Dr. Okonkwo", results: [{ name: "WBC", value: "14.2", unit: "K/uL", ref: "4.5-11.0", flag: "H" }, { name: "RBC", value: "4.1", unit: "M/uL", ref: "4.2-5.8", flag: "L" }, { name: "HGB", value: "12.4", unit: "g/dL", ref: "13.5-17.5", flag: "L" }, { name: "HCT", value: "37.2", unit: "%", ref: "41-53", flag: "L" }, { name: "PLT", value: "312", unit: "K/uL", ref: "150-400", flag: "" }] },
-    { id: "L002", test: "BMP", ordered: "2025-02-28 08:30", resulted: "2025-02-28 10:20", status: "Final", orderedBy: "Dr. Okonkwo", results: [{ name: "Sodium", value: "138", unit: "mEq/L", ref: "136-145", flag: "" }, { name: "Potassium", value: "3.8", unit: "mEq/L", ref: "3.5-5.1", flag: "" }, { name: "Creatinine", value: "1.1", unit: "mg/dL", ref: "0.7-1.3", flag: "" }, { name: "BUN", value: "22", unit: "mg/dL", ref: "7-25", flag: "" }, { name: "Glucose", value: "108", unit: "mg/dL", ref: "70-99", flag: "H" }] },
-    { id: "L003", test: "Procalcitonin", ordered: "2025-03-05 08:00", resulted: "2025-03-05 09:45", status: "Final", orderedBy: "Dr. Okonkwo", results: [{ name: "Procalcitonin", value: "2.4", unit: "ng/mL", ref: "<0.1", flag: "H" }] },
-    { id: "L004", test: "Blood Culture x2", ordered: "2025-02-28 09:00", resulted: null, status: "Pending", orderedBy: "Dr. Okonkwo", results: [] },
+    { id: "L001", test: "CBC with Differential", ordered: "2025-02-28 08:30", resulted: "2025-02-28 10:15", status: "Final", orderedBy: "Dr. Ellison", results: [{ name: "WBC", value: "14.2", unit: "K/uL", ref: "4.5-11.0", flag: "H" }, { name: "RBC", value: "4.1", unit: "M/uL", ref: "4.2-5.8", flag: "L" }, { name: "HGB", value: "12.4", unit: "g/dL", ref: "13.5-17.5", flag: "L" }, { name: "HCT", value: "37.2", unit: "%", ref: "41-53", flag: "L" }, { name: "PLT", value: "312", unit: "K/uL", ref: "150-400", flag: "" }] },
+    { id: "L002", test: "BMP", ordered: "2025-02-28 08:30", resulted: "2025-02-28 10:20", status: "Final", orderedBy: "Dr. Ellison", results: [{ name: "Sodium", value: "138", unit: "mEq/L", ref: "136-145", flag: "" }, { name: "Potassium", value: "3.8", unit: "mEq/L", ref: "3.5-5.1", flag: "" }, { name: "Creatinine", value: "1.1", unit: "mg/dL", ref: "0.7-1.3", flag: "" }, { name: "BUN", value: "22", unit: "mg/dL", ref: "7-25", flag: "" }, { name: "Glucose", value: "108", unit: "mg/dL", ref: "70-99", flag: "H" }] },
+    { id: "L003", test: "Procalcitonin", ordered: "2025-03-05 08:00", resulted: "2025-03-05 09:45", status: "Final", orderedBy: "Dr. Ellison", results: [{ name: "Procalcitonin", value: "2.4", unit: "ng/mL", ref: "<0.1", flag: "H" }] },
+    { id: "L004", test: "Blood Culture x2", ordered: "2025-02-28 09:00", resulted: null, status: "Pending", orderedBy: "Dr. Ellison", results: [] },
   ],
   P002: [
     { id: "L005", test: "HbA1c", ordered: "2025-03-06 10:00", resulted: "2025-03-06 11:30", status: "Final", orderedBy: "Dr. Rivera", results: [{ name: "HbA1c", value: "7.8", unit: "%", ref: "<7.0", flag: "H" }] },
@@ -88,19 +88,19 @@ const LAB_DATA = {
 
 const RADIOLOGY_DATA = {
   P001: [
-    { id: "R001", study: "Chest X-Ray PA/Lateral", ordered: "2025-02-28 08:35", performed: "2025-02-28 11:00", status: "Final", modality: "XR", orderedBy: "Dr. Okonkwo", radiologist: "Dr. Patel", impression: "Bilateral infiltrates consistent with pneumonia. No pleural effusion. No pneumothorax.", findings: "Bilateral patchy airspace opacities, right > left. Cardiac silhouette within normal limits. No acute osseous abnormality." },
-    { id: "R002", study: "CT Chest w/o Contrast", ordered: "2025-03-01 09:00", performed: "2025-03-01 14:30", status: "Final", modality: "CT", orderedBy: "Dr. Okonkwo", radiologist: "Dr. Patel", impression: "Multifocal pneumonia. No pulmonary embolism on limited evaluation.", findings: "Consolidation in right lower lobe and left lower lobe. Ground glass opacities bilaterally. No pleural effusion." },
+    { id: "R001", study: "Chest X-Ray PA/Lateral", ordered: "2025-02-28 08:35", performed: "2025-02-28 11:00", status: "Final", modality: "XR", orderedBy: "Dr. Ellison", radiologist: "Dr. Patel", impression: "Bilateral infiltrates consistent with pneumonia. No pleural effusion. No pneumothorax.", findings: "Bilateral patchy airspace opacities, right > left. Cardiac silhouette within normal limits. No acute osseous abnormality." },
+    { id: "R002", study: "CT Chest w/o Contrast", ordered: "2025-03-01 09:00", performed: "2025-03-01 14:30", status: "Final", modality: "CT", orderedBy: "Dr. Ellison", radiologist: "Dr. Patel", impression: "Multifocal pneumonia. No pulmonary embolism on limited evaluation.", findings: "Consolidation in right lower lobe and left lower lobe. Ground glass opacities bilaterally. No pleural effusion." },
   ],
   P003: [
-    { id: "R003", study: "Hip X-Ray L AP/Lateral", ordered: "2025-03-01 16:00", performed: "2025-03-01 17:00", status: "Final", modality: "XR", orderedBy: "Dr. Okonkwo", radiologist: "Dr. Kim", impression: "Total hip arthroplasty left side. Hardware in good position. No acute complication.", findings: "Left total hip arthroplasty with femoral stem and acetabular component in appropriate position. No hardware failure or periprosthetic fracture identified." },
+    { id: "R003", study: "Hip X-Ray L AP/Lateral", ordered: "2025-03-01 16:00", performed: "2025-03-01 17:00", status: "Final", modality: "XR", orderedBy: "Dr. Ellison", radiologist: "Dr. Kim", impression: "Total hip arthroplasty left side. Hardware in good position. No acute complication.", findings: "Left total hip arthroplasty with femoral stem and acetabular component in appropriate position. No hardware failure or periprosthetic fracture identified." },
   ],
 };
 
 const NOTES_DATA = {
   P001: [
-    { id: "N001", type: "H&P", author: "Dr. Okonkwo", role: "Attending Physician", date: "2025-02-28 09:30", signed: true, content: "CHIEF COMPLAINT: Cough, fever, shortness of breath x 5 days\n\nHPI: Ms. Chen is a 63-year-old female with PMH of HTN and mild asthma who presents with worsening cough productive of yellow-green sputum, fever to 102°F, and dyspnea on exertion for 5 days. She reports associated chills, night sweats, and decreased appetite. Denies chest pain, hemoptysis, or leg swelling.\n\nPAST MEDICAL HISTORY:\n- Hypertension (diagnosed 2018)\n- Mild persistent asthma\n- GERD\n\nMEDICATIONS: Lisinopril 10mg daily, Fluticasone inhaler, Famotidine 20mg daily\n\nALLERGIES: Penicillin (rash), Sulfa (GI intolerance)\n\nPHYSICAL EXAM:\nVitals: T 101.4°F, BP 138/88, HR 92, RR 22, SpO2 94% on RA\nGeneral: Ill-appearing, diaphoretic\nRespiratory: Decreased breath sounds bilateral bases, dullness to percussion right base, crackles bilateral\nCardiac: RRR, no murmurs\n\nASSESSMENT & PLAN:\n1. Community-acquired pneumonia - severity score PORT Class III\n   - IV Ceftriaxone + Azithromycin\n   - Supplemental oxygen to maintain SpO2 >95%\n   - Blood cultures x2, respiratory culture\n   - Chest X-ray\n2. Asthma exacerbation - Albuterol nebulization Q4H PRN\n3. HTN - Continue home Lisinopril" },
+    { id: "N001", type: "H&P", author: "Dr. Ellison", role: "Attending Physician", date: "2025-02-28 09:30", signed: true, content: "CHIEF COMPLAINT: Cough, fever, shortness of breath x 5 days\n\nHPI: Ms. Chen is a 63-year-old female with PMH of HTN and mild asthma who presents with worsening cough productive of yellow-green sputum, fever to 102°F, and dyspnea on exertion for 5 days. She reports associated chills, night sweats, and decreased appetite. Denies chest pain, hemoptysis, or leg swelling.\n\nPAST MEDICAL HISTORY:\n- Hypertension (diagnosed 2018)\n- Mild persistent asthma\n- GERD\n\nMEDICATIONS: Lisinopril 10mg daily, Fluticasone inhaler, Famotidine 20mg daily\n\nALLERGIES: Penicillin (rash), Sulfa (GI intolerance)\n\nPHYSICAL EXAM:\nVitals: T 101.4°F, BP 138/88, HR 92, RR 22, SpO2 94% on RA\nGeneral: Ill-appearing, diaphoretic\nRespiratory: Decreased breath sounds bilateral bases, dullness to percussion right base, crackles bilateral\nCardiac: RRR, no murmurs\n\nASSESSMENT & PLAN:\n1. Community-acquired pneumonia - severity score PORT Class III\n   - IV Ceftriaxone + Azithromycin\n   - Supplemental oxygen to maintain SpO2 >95%\n   - Blood cultures x2, respiratory culture\n   - Chest X-ray\n2. Asthma exacerbation - Albuterol nebulization Q4H PRN\n3. HTN - Continue home Lisinopril" },
     { id: "N002", type: "Nursing Note", author: "RN Jennifer Torres", role: "Registered Nurse", date: "2025-02-28 14:00", signed: true, content: "Patient is alert and oriented x3. Received per report from ED. IV access x2 established (18g R antecubital, 20g L hand). IV antibiotics initiated per order. O2 via nasal cannula at 2L/min with SpO2 94-96%. Patient tolerating fluids. Appetite poor. Teaching provided regarding medication purpose and respiratory precautions. Call light within reach. Side rails up x2." },
-    { id: "N003", type: "Progress Note", author: "Dr. Okonkwo", role: "Attending Physician", date: "2025-03-06 08:45", signed: true, content: "SUBJECTIVE: Patient reports improved cough, fever resolved overnight. Still some mild dyspnea with ambulation but significantly better than admission.\n\nOBJECTIVE:\nVitals: T 99.2°F, BP 128/76, HR 84, RR 18, SpO2 97% on RA\nExam: Improved breath sounds bilaterally, decreased crackles\nLabs: WBC trending down from 14.2 → 11.8, Procalcitonin 0.8\n\nASSESSMENT: CAP - improving on IV antibiotics\n\nPLAN:\n- Transition to PO Azithromycin 500mg daily today\n- Continue monitoring\n- Target discharge tomorrow if continues to improve\n- Discharge planning initiated with case management" },
+    { id: "N003", type: "Progress Note", author: "Dr. Ellison", role: "Attending Physician", date: "2025-03-06 08:45", signed: true, content: "SUBJECTIVE: Patient reports improved cough, fever resolved overnight. Still some mild dyspnea with ambulation but significantly better than admission.\n\nOBJECTIVE:\nVitals: T 99.2°F, BP 128/76, HR 84, RR 18, SpO2 97% on RA\nExam: Improved breath sounds bilaterally, decreased crackles\nLabs: WBC trending down from 14.2 → 11.8, Procalcitonin 0.8\n\nASSESSMENT: CAP - improving on IV antibiotics\n\nPLAN:\n- Transition to PO Azithromycin 500mg daily today\n- Continue monitoring\n- Target discharge tomorrow if continues to improve\n- Discharge planning initiated with case management" },
   ],
   P002: [
     { id: "N004", type: "Office Visit Note", author: "Dr. Rivera", role: "Attending Physician", date: "2025-03-06 10:30", signed: true, content: "SUBJECTIVE: Mr. Whitfield presents for 3-month diabetes follow-up. Reports checking blood sugars at home 2x/day, fasting glucose typically 130-160. Diet adherent about 70%. Walking 20 min/day. Denies hypoglycemia, polyuria, or vision changes.\n\nOBJECTIVE:\nVitals: BP 142/90, HR 78, Wt 198 lbs\nHbA1c today: 7.8% (up from 7.4% three months ago)\nFoot exam: Intact sensation bilateral, pulses palpable\n\nASSESSMENT:\n1. Type 2 DM - suboptimally controlled, HbA1c trending up\n2. HTN - borderline control\n\nPLAN:\n1. Increase Metformin to 1000mg BID (from 500mg BID)\n2. Refer to diabetes education program\n3. Nutrition counseling referral\n4. Increase Lisinopril to 20mg daily\n5. Return in 3 months, HbA1c at that visit" },
@@ -110,7 +110,7 @@ const NOTES_DATA = {
 const APPOINTMENTS = [
   { id: "APT001", patientId: "P005", patientName: "Diane Okafor", date: "2025-03-07", time: "09:00", type: "New Patient", provider: "Dr. Lisa Park", dept: "Internal Medicine", status: "Confirmed", reason: "Annual physical" },
   { id: "APT002", patientId: "P002", patientName: "James Whitfield", date: "2025-03-07", time: "10:30", type: "Follow-up", provider: "Dr. Marcus Rivera", dept: "Endocrinology", status: "Confirmed", reason: "Diabetes management" },
-  { id: "APT003", patientId: "P004", patientName: "Robert Nakamura", date: "2025-03-07", time: "14:00", type: "Post-op", provider: "Dr. Sarah Okonkwo", dept: "Surgery", status: "Pending", reason: "Post-appendectomy check" },
+  { id: "APT003", patientId: "P004", patientName: "Robert Nakamura", date: "2025-03-07", time: "14:00", type: "Post-op", provider: "Dr. Sarah Ellison", dept: "Surgery", status: "Pending", reason: "Post-appendectomy check" },
   { id: "APT004", patientId: "P005", patientName: "Diane Okafor", date: "2025-03-10", time: "11:00", type: "Lab", provider: "Lab Services", dept: "Laboratory", status: "Scheduled", reason: "Routine labs" },
   { id: "APT005", patientId: "P002", patientName: "James Whitfield", date: "2025-03-14", time: "09:30", type: "Follow-up", provider: "Dr. Marcus Rivera", dept: "Endocrinology", status: "Scheduled", reason: "BP check" },
 ];
@@ -211,7 +211,7 @@ const SectionHeader = ({ icon, title, action }) => (
 
 // ─── LOGIN SCREEN ─────────────────────────────────────────────────────────────
 const Login = ({ onLogin }) => {
-  const [user, setUser] = useState("dr.okonkwo");
+  const [user, setUser] = useState("dr.ellison");
   const [pass, setPass] = useState("password");
   const [role, setRole] = useState("physician");
   const roles = [
@@ -924,7 +924,7 @@ const PatientChart = ({ patient, user, onBack }) => {
 // ─── SCHEDULING MASTER DATA ───────────────────────────────────────────────────
 const PROVIDERS_LIST = [
   // Internal Medicine
-  { id: "PR001", name: "Dr. Sarah Okonkwo", credential: "MD, FACP", dept: "Internal Medicine", specialty: "General Internal Medicine", npi: "1234567890", schedule: ["Mon","Tue","Wed","Thu","Fri"], slots: ["08:00","08:30","09:00","09:30","10:00","10:30","11:00","14:00","14:30","15:00","15:30","16:00"], color: "#4a7fee", accepting: true },
+  { id: "PR001", name: "Dr. Sarah Ellison", credential: "MD, FACP", dept: "Internal Medicine", specialty: "General Internal Medicine", npi: "1234567890", schedule: ["Mon","Tue","Wed","Thu","Fri"], slots: ["08:00","08:30","09:00","09:30","10:00","10:30","11:00","14:00","14:30","15:00","15:30","16:00"], color: "#4a7fee", accepting: true },
   { id: "PR002", name: "Dr. Marcus Rivera", credential: "MD, FACE", dept: "Endocrinology", specialty: "Endocrinology & Metabolism", npi: "1234567891", schedule: ["Mon","Tue","Thu","Fri"], slots: ["09:00","09:30","10:00","10:30","11:00","13:00","13:30","14:00","14:30"], color: "#00c8e0", accepting: true },
   { id: "PR003", name: "Dr. Lisa Park", credential: "MD", dept: "Internal Medicine", specialty: "General Internal Medicine", npi: "1234567892", schedule: ["Mon","Wed","Fri"], slots: ["08:00","08:30","09:00","09:30","10:00","10:30","11:00","11:30"], color: "#00d68f", accepting: true },
   { id: "PR004", name: "Dr. James Thornton", credential: "MD, FACS", dept: "Surgery", specialty: "General Surgery", npi: "1234567893", schedule: ["Tue","Wed","Thu"], slots: ["07:00","07:30","08:00","12:00","12:30","13:00","13:30"], color: "#ffb800", accepting: true },
@@ -4423,7 +4423,7 @@ const NotesDept = ({ onPatient, patientFlow, setPatientFlow }) => {
   const [tab, setTab] = useState("all");
   const [selPat, setSelPat] = useState(null);
   const [composing, setComposing] = useState(false);
-  const [noteForm, setNoteForm] = useState({ patientId:"", type:"Progress Note", title:"", content:"", author:"Dr. Sarah Okonkwo", cosigner:"", status:"Draft" });
+  const [noteForm, setNoteForm] = useState({ patientId:"", type:"Progress Note", title:"", content:"", author:"Dr. Sarah Ellison", cosigner:"", status:"Draft" });
   const [toast, setToast] = useState(null);
   const showToast = (m) => { setToast(m); setTimeout(()=>setToast(null),3000); };
 
@@ -4443,7 +4443,7 @@ const NotesDept = ({ onPatient, patientFlow, setPatientFlow }) => {
     const n = { id:"NOTE_"+Date.now(), type:noteForm.type, title:noteForm.title||noteForm.type, content:noteForm.content, author:noteForm.author, cosigner:noteForm.cosigner, date:new Date().toISOString().slice(0,10), status, encounter:"ENC_"+Date.now() };
     setPatientFlow?.(prev=>({...prev,[noteForm.patientId]:{...(prev?.[noteForm.patientId]||{}),notes:[...(prev?.[noteForm.patientId]?.notes||NOTES_DATA[noteForm.patientId]||[]),n]}}));
     setComposing(false);
-    setNoteForm({patientId:"",type:"Progress Note",title:"",content:"",author:"Dr. Sarah Okonkwo",cosigner:"",status:"Draft"});
+    setNoteForm({patientId:"",type:"Progress Note",title:"",content:"",author:"Dr. Sarah Ellison",cosigner:"",status:"Draft"});
     showToast(status==="Signed"?`✓ Note signed and locked`:`Note saved as draft`);
   };
 
