@@ -3752,6 +3752,7 @@ const Inpatient = ({ onPatient, patientFlow, setPatientFlow }) => {
                       <div>
                         <div style={{ fontSize:11, color:"var(--green)", marginBottom:8 }}>✓ Ready for admission</div>
                         <button onClick={()=>{setAdmitForm(f=>({...f,room}));setActiveTab("admit");}} style={{ width:"100%", padding:"5px", background:"var(--green)15", border:"1px solid var(--green)35", borderRadius:4, color:"var(--green)", fontSize:11, fontWeight:600, cursor:"pointer" }}>+ Admit to Room</button>
+                      </div>
                     )}
                   </div>
                 );
@@ -4534,7 +4535,7 @@ const NotesDept = ({ onPatient, patientFlow, setPatientFlow }) => {
                     </div>
                   </div>
                   <div style={{padding:"14px 16px",fontSize:12,color:"var(--text)",lineHeight:1.8,whiteSpace:"pre-wrap",fontFamily:"'IBM Plex Mono',monospace",maxHeight:220,overflowY:"auto",background:"var(--navy)20"}}>{note.content||note.text}</div>
-                  <div style={{padding:"8px 16px",background:"var(--card-2)",borderTop:"1px solid var(--border)",display:"flex",gap:8"}}>
+                  <div style={{padding:"8px 16px",background:"var(--card-2)",borderTop:"1px solid var(--border)",display:"flex",gap:8}}>
                     <button onClick={()=>note.patient&&onPatient(note.patient)} style={{padding:"4px 10px",background:"var(--navy-2)",border:"1px solid var(--border)",borderRadius:4,color:"var(--text-2)",fontSize:11,cursor:"pointer"}}>Open Chart</button>
                     {note.status==="Signed"&&<button style={{padding:"4px 10px",background:"var(--navy-2)",border:"1px solid var(--border)",borderRadius:4,color:"var(--text-2)",fontSize:11,cursor:"pointer"}}>Addendum</button>}
                     <button style={{padding:"4px 10px",background:"var(--navy-2)",border:"1px solid var(--border)",borderRadius:4,color:"var(--text-2)",fontSize:11,cursor:"pointer"}}>Print</button>
