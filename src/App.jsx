@@ -2584,6 +2584,9 @@ const Ambulatory = ({ onPatient, appointments, onUpdateAppt, onAddAppt, patientF
             TAB: ENCOUNTER LIST
         ───────────────────────────────── */}
         {activeTab === "encounters" && (
+          <div style={{ padding: "0" }}>
+            <div style={{ padding: "10px 20px", background: "var(--card-2)", borderBottom: "1px solid var(--border)", fontSize: 12, color: "var(--text-2)" }}>
+              All checked-in and in-progress encounters. Vitals recorded during check-in appear here.
             </div>
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
               <thead>
@@ -6040,4 +6043,5 @@ const EmergencyRoom = ({ patientFlow, setPatientFlow }) => {
     </div>
   );
 };
+
 
