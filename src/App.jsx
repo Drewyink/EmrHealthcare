@@ -30,16 +30,166 @@ const GlobalStyle = () => (
       --card-2: #0a1830;
       --sidebar-w: 240px;
       --header-h: 56px;
+      --bottom-nav-h: 60px;
     }
-    body { font-family: 'IBM Plex Sans', sans-serif; background: var(--navy); color: var(--text); overflow: hidden; }
-    ::-webkit-scrollbar { width: 5px; height: 5px; }
+
+    /* ── RESPONSIVE OVERRIDES ── */
+    @media (max-width: 1024px) {
+      :root { --sidebar-w: 64px; }
+    }
+    @media (max-width: 640px) {
+      :root { --sidebar-w: 0px; --header-h: 50px; }
+    }
+
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      overflow: hidden;
+      -webkit-text-size-adjust: 100%;
+      touch-action: manipulation;
+    }
+
+    /* Scrollbars */
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
     ::-webkit-scrollbar-track { background: var(--navy-2); }
     ::-webkit-scrollbar-thumb { background: var(--navy-3); border-radius: 3px; }
-    button { cursor: pointer; font-family: inherit; }
-    input, select, textarea { font-family: inherit; }
+
+    button { cursor: pointer; font-family: inherit; -webkit-tap-highlight-color: transparent; }
+    input, select, textarea { font-family: inherit; -webkit-appearance: none; }
     .mono { font-family: 'IBM Plex Mono', monospace; }
+
+    /* ── MOBILE BOTTOM NAV ── */
+    .bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: var(--bottom-nav-h);
+      background: var(--card-2);
+      border-top: 1px solid var(--border);
+      z-index: 200;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .bottom-nav::-webkit-scrollbar { display: none; }
+    .bottom-nav-inner {
+      display: flex;
+      align-items: stretch;
+      height: 100%;
+      min-width: max-content;
+      padding: 0 4px;
+    }
+    @media (max-width: 640px) {
+      .bottom-nav { display: block; }
+      .desktop-sidebar { display: none !important; }
+      .main-content-area { padding-bottom: var(--bottom-nav-h) !important; }
+    }
+
+    /* ── TABLET ICON SIDEBAR ── */
+    @media (min-width: 641px) and (max-width: 1024px) {
+      .sidebar-label { display: none !important; }
+      .sidebar-badge { display: none !important; }
+      .sidebar-logo-text { display: none !important; }
+      .sidebar-user-name { display: none !important; }
+    }
+
+    /* ── RESPONSIVE TABLES ── */
+    @media (max-width: 900px) {
+      .resp-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .resp-hide-sm { display: none !important; }
+    }
+    @media (max-width: 640px) {
+      .resp-hide-xs { display: none !important; }
+      .resp-full-xs { width: 100% !important; max-width: 100% !important; }
+      .resp-p-xs { padding: 10px 12px !important; }
+      .resp-grid-1 { grid-template-columns: 1fr !important; }
+      .resp-grid-2 { grid-template-columns: 1fr 1fr !important; }
+      .resp-font-sm { font-size: 11px !important; }
+    }
+
+    /* ── TOUCH TARGETS ── */
+    @media (max-width: 1024px) {
+      button { min-height: 36px; }
+      input, select { min-height: 36px; font-size: 16px !important; }
+    }
+
+    /* ── MODAL RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .resp-modal {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100% !important;
+        max-height: 100% !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+      }
+      .resp-modal-inner {
+        position: fixed !important;
+        inset: 0 !important;
+        border-radius: 0 !important;
+      }
+    }
+
+    /* ── MOBILE DRAWER OVERLAY ── */
+    .mobile-drawer-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 300;
+    }
+    .mobile-drawer {
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      width: 260px;
+      background: var(--card-2);
+      border-right: 1px solid var(--border);
+      z-index: 301;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(-100%);
+      transition: transform 0.25s ease;
+    }
+    .mobile-drawer.open { transform: translateX(0); }
+    @media (max-width: 640px) {
+      .mobile-drawer-overlay.open { display: block; }
+    }
+
+    /* ── PREVENT BODY SCROLL WHEN DRAWER OPEN ── */
+    body.drawer-open { overflow: hidden; }
+
+    /* ── STAT CARDS RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .stat-grid { grid-template-columns: repeat(2, 1fr) !important; }
+      .stat-grid-3 { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+
+    /* ── HEADER RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .header-search { display: none !important; }
+      .header-status { display: none !important; }
+    }
+
+    /* Safe area for notched phones */
+    @supports (padding: env(safe-area-inset-bottom)) {
+      .bottom-nav { padding-bottom: env(safe-area-inset-bottom); height: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom)); }
+      .main-content-area { padding-bottom: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom)) !important; }
+    }
   `}</style>
 );
+
+// ─── RESPONSIVE HOOKS ────────────────────────────────────────────────────────
+const useIsMobile = () => {
+  const [w, setW] = useState(typeof window !== "undefined" ? window.innerWidth : 1200);
+  useEffect(() => {
+    const handler = () => setW(window.innerWidth);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+  return { isMobile: w <= 640, isTablet: w > 640 && w <= 1024, isDesktop: w > 1024, width: w };
+};
 
 // ─── MOCK DATA ────────────────────────────────────────────────────────────────
 const PATIENTS = [
@@ -262,7 +412,8 @@ const Login = ({ onLogin }) => {
 };
 
 // ─── SIDEBAR ──────────────────────────────────────────────────────────────────
-const Sidebar = ({ active, onNav, user }) => {
+const Sidebar = ({ active, onNav, user, mobileOpen, onMobileClose }) => {
+  const { isMobile, isTablet } = useIsMobile();
   const navItems = [
     { id: "dashboard",  icon: "home",     label: "Dashboard" },
     { id: "patients",   icon: "users",    label: "Patients" },
@@ -277,34 +428,122 @@ const Sidebar = ({ active, onNav, user }) => {
     { id: "discharge",  icon: "door",     label: "Discharge" },
     { id: "billing",    icon: "billing",  label: "Billing" },
   ];
-  return (
-    <div style={{ width: "var(--sidebar-w)", minHeight: "100vh", background: "var(--card-2)", borderRight: "1px solid var(--border-2)", display: "flex", flexDirection: "column", flexShrink: 0 }}>
-      <div style={{ padding: "16px 18px", borderBottom: "1px solid var(--border-2)", display: "flex", alignItems: "center", gap: 10 }}>
-        <div style={{ width: 30, height: 30, background: "linear-gradient(135deg, var(--blue), var(--cyan))", borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-          <Icon name="heart" size={14} />
-        </div>
-        <div>
-          <div style={{ fontSize: 13, fontWeight: 700, lineHeight: 1.2 }}>MedCore <span style={{ color: "var(--cyan)" }}>EMR</span></div>
-          <div style={{ fontSize: 10, color: "var(--text-3)", letterSpacing: "0.05em" }}>ENTERPRISE v4.2</div>
-        </div>
-      </div>
-      <div style={{ padding: "8px 0", flex: 1, overflowY: "auto" }}>
-        {navItems.map(item => (
-          <button key={item.id} onClick={() => onNav(item.id)} style={{ width: "100%", display: "flex", alignItems: "center", gap: 10, padding: "9px 18px", background: active === item.id ? (item.id==="emergency"?"linear-gradient(90deg,#e5343a20,transparent)":"linear-gradient(90deg, #1e56d920, transparent)") : "transparent", color: active === item.id ? (item.id==="emergency"?"#e5343a":"var(--cyan)") : "var(--text-2)", border: "none", borderLeft: active === item.id ? `2px solid ${item.id==="emergency"?"#e5343a":"var(--cyan)"}` : "2px solid transparent", fontSize: 13, fontWeight: active === item.id ? 600 : 400, cursor: "pointer", textAlign: "left", transition: "all .15s" }}>
-            <Icon name={item.icon} size={15} />
-            {item.label}
-            {item.badge && <span style={{ marginLeft:"auto", background:"#e5343a", color:"#fff", borderRadius:3, padding:"1px 6px", fontSize:9, fontWeight:700, letterSpacing:"0.05em" }}>{item.badge}</span>}
-          </button>
-        ))}
-      </div>
-      <div style={{ padding: "12px 18px", borderTop: "1px solid var(--border-2)" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
-          <div style={{ width: 28, height: 28, borderRadius: "50%", background: "var(--blue)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 700 }}>
-            {user.username.slice(0, 2).toUpperCase()}
+
+  const handleNav = (id) => { onNav(id); if (isMobile) onMobileClose(); };
+
+  const navBtn = (item, compact=false) => {
+    const isActive = active === item.id;
+    const isER = item.id === "emergency";
+    const activeColor = isER ? "#e5343a" : "var(--cyan)";
+    return (
+      <button key={item.id} onClick={() => handleNav(item.id)}
+        title={compact ? item.label : undefined}
+        style={{ width: "100%", display: "flex", alignItems: "center", gap: compact ? 0 : 10, justifyContent: compact ? "center" : "flex-start", padding: compact ? "11px 0" : "9px 18px", background: isActive ? (isER ? "linear-gradient(90deg,#e5343a20,transparent)" : "linear-gradient(90deg,#1e56d920,transparent)") : "transparent", color: isActive ? activeColor : "var(--text-2)", border: "none", borderLeft: compact ? "none" : (isActive ? `2px solid ${activeColor}` : "2px solid transparent"), fontSize: 13, fontWeight: isActive ? 600 : 400, cursor: "pointer", textAlign: "left", transition: "all .15s", position: "relative" }}>
+        <Icon name={item.icon} size={compact ? 18 : 15} />
+        {!compact && <span className="sidebar-label">{item.label}</span>}
+        {!compact && item.badge && <span className="sidebar-badge" style={{ marginLeft:"auto", background:"#e5343a", color:"#fff", borderRadius:3, padding:"1px 6px", fontSize:9, fontWeight:700 }}>{item.badge}</span>}
+        {compact && item.badge && <span style={{ position:"absolute", top:6, right:8, width:6, height:6, borderRadius:"50%", background:"#e5343a" }}/>}
+        {compact && isActive && <span style={{ position:"absolute", left:0, top:"20%", bottom:"20%", width:2, background:activeColor, borderRadius:"0 2px 2px 0" }}/>}
+      </button>
+    );
+  };
+
+  // ── MOBILE BOTTOM NAV ──
+  if (isMobile) {
+    // show first 6 most important items in bottom bar
+    const primary = navItems.slice(0, 6);
+    return (
+      <>
+        {/* Drawer overlay */}
+        <div className={`mobile-drawer-overlay ${mobileOpen ? "open" : ""}`} onClick={onMobileClose}/>
+        {/* Full drawer */}
+        <div className={`mobile-drawer ${mobileOpen ? "open" : ""}`}>
+          <div style={{ padding:"16px 18px", borderBottom:"1px solid var(--border-2)", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
+            <div style={{ display:"flex", alignItems:"center", gap:10 }}>
+              <div style={{ width:28, height:28, background:"linear-gradient(135deg,var(--blue),var(--cyan))", borderRadius:6, display:"flex", alignItems:"center", justifyContent:"center" }}><Icon name="heart" size={13}/></div>
+              <div>
+                <div style={{ fontSize:13, fontWeight:700 }}>MedCore <span style={{ color:"var(--cyan)" }}>EMR</span></div>
+                <div style={{ fontSize:9, color:"var(--text-3)", letterSpacing:"0.05em" }}>ENTERPRISE v4.2</div>
+              </div>
+            </div>
+            <button onClick={onMobileClose} style={{ background:"none", border:"none", color:"var(--text-2)", fontSize:20, padding:"4px 8px" }}>✕</button>
           </div>
-          <div>
-            <div style={{ fontSize: 12, fontWeight: 600 }}>{user.username}</div>
-            <div style={{ fontSize: 10, color: "var(--text-3)", textTransform: "capitalize" }}>{user.role}</div>
+          <div style={{ flex:1, overflowY:"auto", padding:"6px 0" }}>
+            {navItems.map(item => navBtn(item, false))}
+          </div>
+          <div style={{ padding:"12px 18px", borderTop:"1px solid var(--border-2)", display:"flex", alignItems:"center", gap:8 }}>
+            <div style={{ width:28, height:28, borderRadius:"50%", background:"var(--blue)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:11, fontWeight:700 }}>{user.username.slice(0,2).toUpperCase()}</div>
+            <div>
+              <div style={{ fontSize:12, fontWeight:600 }}>{user.username}</div>
+              <div style={{ fontSize:10, color:"var(--text-3)", textTransform:"capitalize" }}>{user.role}</div>
+            </div>
+          </div>
+        </div>
+        {/* Bottom tab bar */}
+        <nav className="bottom-nav">
+          <div className="bottom-nav-inner">
+            {primary.map(item => {
+              const isActive = active === item.id;
+              const isER = item.id === "emergency";
+              const ac = isER ? "#e5343a" : "var(--cyan)";
+              return (
+                <button key={item.id} onClick={() => handleNav(item.id)}
+                  style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:3, padding:"6px 14px", background:"none", border:"none", color:isActive ? ac : "var(--text-3)", borderTop:`2px solid ${isActive ? ac : "transparent"}`, fontSize:9, fontWeight:isActive?700:400, minWidth:56, cursor:"pointer", transition:"all .12s", whiteSpace:"nowrap" }}>
+                  <Icon name={item.icon} size={18}/>
+                  <span style={{ fontSize:9 }}>{item.id === "emergency" ? "ER" : item.label.split(" ")[0]}</span>
+                  {item.badge && isActive && <span style={{ position:"absolute", top:8, width:5, height:5, borderRadius:"50%", background:"#e5343a" }}/>}
+                </button>
+              );
+            })}
+            {/* "More" button opens drawer */}
+            <button onClick={() => onMobileClose === onMobileClose && document.dispatchEvent(new CustomEvent("openDrawer"))}
+              style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:3, padding:"6px 14px", background:"none", border:"none", color:"var(--text-3)", borderTop:"2px solid transparent", fontSize:9, fontWeight:400, minWidth:56, cursor:"pointer" }}
+              onClick={() => { document.dispatchEvent(new CustomEvent("openDrawer")); }}>
+              <span style={{ fontSize:18, lineHeight:1 }}>⋯</span>
+              <span style={{ fontSize:9 }}>More</span>
+            </button>
+          </div>
+        </nav>
+      </>
+    );
+  }
+
+  // ── TABLET ICON SIDEBAR ──
+  if (isTablet) {
+    return (
+      <div className="desktop-sidebar" style={{ width:64, minHeight:"100vh", background:"var(--card-2)", borderRight:"1px solid var(--border-2)", display:"flex", flexDirection:"column", flexShrink:0 }}>
+        <div style={{ padding:"14px 0", borderBottom:"1px solid var(--border-2)", display:"flex", justifyContent:"center" }}>
+          <div style={{ width:28, height:28, background:"linear-gradient(135deg,var(--blue),var(--cyan))", borderRadius:6, display:"flex", alignItems:"center", justifyContent:"center" }}><Icon name="heart" size={13}/></div>
+        </div>
+        <div style={{ flex:1, overflowY:"auto", padding:"6px 0" }}>
+          {navItems.map(item => navBtn(item, true))}
+        </div>
+        <div style={{ padding:"10px 0", borderTop:"1px solid var(--border-2)", display:"flex", justifyContent:"center" }}>
+          <div style={{ width:28, height:28, borderRadius:"50%", background:"var(--blue)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:10, fontWeight:700 }}>{user.username.slice(0,2).toUpperCase()}</div>
+        </div>
+      </div>
+    );
+  }
+
+  // ── DESKTOP FULL SIDEBAR ──
+  return (
+    <div className="desktop-sidebar" style={{ width:"var(--sidebar-w)", minHeight:"100vh", background:"var(--card-2)", borderRight:"1px solid var(--border-2)", display:"flex", flexDirection:"column", flexShrink:0 }}>
+      <div style={{ padding:"16px 18px", borderBottom:"1px solid var(--border-2)", display:"flex", alignItems:"center", gap:10 }}>
+        <div style={{ width:30, height:30, background:"linear-gradient(135deg,var(--blue),var(--cyan))", borderRadius:6, display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}><Icon name="heart" size={14}/></div>
+        <div className="sidebar-logo-text">
+          <div style={{ fontSize:13, fontWeight:700, lineHeight:1.2 }}>MedCore <span style={{ color:"var(--cyan)" }}>EMR</span></div>
+          <div style={{ fontSize:10, color:"var(--text-3)", letterSpacing:"0.05em" }}>ENTERPRISE v4.2</div>
+        </div>
+      </div>
+      <div style={{ padding:"8px 0", flex:1, overflowY:"auto" }}>
+        {navItems.map(item => navBtn(item, false))}
+      </div>
+      <div style={{ padding:"12px 18px", borderTop:"1px solid var(--border-2)" }}>
+        <div style={{ display:"flex", alignItems:"center", gap:8 }}>
+          <div style={{ width:28, height:28, borderRadius:"50%", background:"var(--blue)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:11, fontWeight:700 }}>{user.username.slice(0,2).toUpperCase()}</div>
+          <div className="sidebar-user-name">
+            <div style={{ fontSize:12, fontWeight:600 }}>{user.username}</div>
+            <div style={{ fontSize:10, color:"var(--text-3)", textTransform:"capitalize" }}>{user.role}</div>
           </div>
         </div>
       </div>
@@ -5060,8 +5299,21 @@ export default function App() {
   const [view, setView] = useState("dashboard");
   const [selectedPatient, setSelectedPatient] = useState(null);
   const [globalAppts, setGlobalAppts] = useState(APPOINTMENTS);
-  // Shared patient journey state — flows through all clinical modules
   const [patientFlow, setPatientFlow] = useState({});
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const { isMobile } = useIsMobile();
+
+  // Listen for "More" button events from bottom nav
+  useEffect(() => {
+    const handler = () => setDrawerOpen(true);
+    document.addEventListener("openDrawer", handler);
+    return () => document.removeEventListener("openDrawer", handler);
+  }, []);
+
+  // Lock body scroll when drawer open
+  useEffect(() => {
+    document.body.classList.toggle("drawer-open", drawerOpen);
+  }, [drawerOpen]);
 
   const handlePatient = (patient) => { setSelectedPatient(patient); setView("chart"); };
   const updateApptStatus = (apptId, newStatus) => {
@@ -5074,26 +5326,48 @@ export default function App() {
     <>
       <GlobalStyle />
       <div style={{ display: "flex", height: "100vh", overflow: "hidden" }}>
-        <Sidebar active={view === "chart" ? "patients" : view} onNav={(v) => { setView(v); setSelectedPatient(null); }} user={user} />
-        <div style={{ flex: 1, overflow: "hidden", display: "flex", flexDirection: "column" }}>
-          <div style={{ height: "var(--header-h)", background: "var(--card)", borderBottom: "1px solid var(--border)", display: "flex", alignItems: "center", padding: "0 24px", flexShrink: 0, gap: 12 }}>
-            <div style={{ flex: 1, display: "flex", alignItems: "center", gap: 10 }}>
+        <Sidebar
+          active={view === "chart" ? "patients" : view}
+          onNav={(v) => { setView(v); setSelectedPatient(null); }}
+          user={user}
+          mobileOpen={drawerOpen}
+          onMobileClose={() => setDrawerOpen(false)}
+        />
+        <div style={{ flex: 1, overflow: "hidden", display: "flex", flexDirection: "column", minWidth: 0 }}>
+          {/* Top header */}
+          <div style={{ height: "var(--header-h)", background: "var(--card)", borderBottom: "1px solid var(--border)", display: "flex", alignItems: "center", padding: "0 16px", flexShrink: 0, gap: 10 }}>
+            {/* Hamburger — mobile only */}
+            {isMobile && (
+              <button onClick={() => setDrawerOpen(true)} style={{ background: "none", border: "none", color: "var(--text-2)", fontSize: 20, padding: "4px 8px", display: "flex", alignItems: "center", flexShrink: 0 }}>
+                ☰
+              </button>
+            )}
+            {/* Logo — mobile */}
+            {isMobile && (
+              <div style={{ fontSize: 13, fontWeight: 700, flexShrink: 0 }}>MedCore <span style={{ color: "var(--cyan)" }}>EMR</span></div>
+            )}
+            {/* Search — hidden on mobile */}
+            <div className="header-search" style={{ flex: 1, display: "flex", alignItems: "center", gap: 10 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 8, background: "var(--navy-2)", border: "1px solid var(--border)", borderRadius: 6, padding: "6px 12px", width: 240 }}>
                 <Icon name="search" size={13} />
                 <input placeholder="Search patients, orders..." style={{ background: "transparent", border: "none", color: "var(--text)", fontSize: 13, outline: "none", width: "100%" }} />
               </div>
             </div>
-            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              <div style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--green)" }} />
-              <span style={{ fontSize: 12, color: "var(--text-2)" }}>System Online</span>
-              <div style={{ width: 1, height: 20, background: "var(--border)" }} />
-              <span style={{ fontSize: 12, color: "var(--text-2)", textTransform: "capitalize" }}>{user.role}: <strong style={{ color: "var(--text)" }}>{user.username}</strong></span>
-              <button onClick={() => setUser(null)} style={{ display: "flex", alignItems: "center", gap: 6, padding: "5px 10px", background: "var(--navy-2)", border: "1px solid var(--border)", borderRadius: 5, color: "var(--text-2)", fontSize: 12 }}>
-                <Icon name="logout" size={12} /> Logout
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginLeft: "auto" }}>
+              <div className="header-status" style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <div style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--green)" }} />
+                <span style={{ fontSize: 12, color: "var(--text-2)" }}>Online</span>
+                <div style={{ width: 1, height: 18, background: "var(--border)" }} />
+                <span style={{ fontSize: 12, color: "var(--text-2)", textTransform: "capitalize" }}>{user.role}: <strong style={{ color: "var(--text)" }}>{user.username}</strong></span>
+              </div>
+              <button onClick={() => setUser(null)} style={{ display: "flex", alignItems: "center", gap: 5, padding: "5px 10px", background: "var(--navy-2)", border: "1px solid var(--border)", borderRadius: 5, color: "var(--text-2)", fontSize: 12 }}>
+                <Icon name="logout" size={12} /><span className="header-status">Logout</span>
               </button>
             </div>
           </div>
-          <div style={{ flex: 1, overflow: "auto" }}>
+
+          {/* Main content */}
+          <div className="main-content-area" style={{ flex: 1, overflow: "auto" }}>
             {view === "chart" && selectedPatient && <PatientChart patient={selectedPatient} user={user} onBack={() => { setSelectedPatient(null); setView("patients"); }} />}
             {view === "dashboard" && <Dashboard onNav={setView} onPatient={handlePatient} />}
             {view === "patients" && <PatientList onPatient={handlePatient} />}
